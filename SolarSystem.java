@@ -35,7 +35,16 @@ public class SolarSystem extends JFrame
 		this.setSize(width, height);
 		this.setBackground(Color.BLACK);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.setUndecorated(true);
         this.setVisible(true);		
+
+		GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+
+		graphicsDevice.setFullScreenWindow(this);
+        if (graphicsDevice.isDisplayChangeSupported()) {
+            graphicsDevice.setDisplayMode(graphicsDevice.getDisplayMode());
+        }
         
         renderingHints = new HashMap<>();
 		renderingHints.put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
@@ -220,7 +229,7 @@ public class SolarSystem extends JFrame
 		try
 		{
 			this.repaint();
-			Thread.sleep(20);//0000);
+			Thread.sleep(20);
 			synchronized (this)
 			{
 				things.clear();
